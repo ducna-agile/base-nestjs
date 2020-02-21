@@ -1,0 +1,45 @@
+version: '3.1'
+
+services:
+  database:
+    image: mariadb
+    environment:
+      - MYSQL_DATABASE=apikit_db
+      - MYSQL_USER=apikit_user
+      - MYSQL_PASSWORD=apikit_password
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    volumes:
+      - ./data/db:/var/lib/mysql
+    ports:
+      - 6336:3306
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=database
+      - PMA_PORT=3306
+      - PMA_USER=apikit_user
+      - PMA_PASSWORD=apikit_password
+    ports:
+      - 6380:80
+
+  redis:
+    image: redis
+    ports:
+      - 7479:6379
+
+  # app:
+  #   build: .
+  #   image: apikit
+  #   expose:
+  #     - 2000
+  #   environment:
+  #     - DATABASE_URL=mysql://apikit_user:apikit_password@database:3306/apikit_db?connectionLimit=10
+  #     - PORT=2000
+  #     - LOG_FILE=./logs/errors.log
+  #     - REDIS_URL=redis://redis:6379
+  #     - REDIS_PREFIX='app_'
+
+  #   ports:
+  #     - 4080:2000
