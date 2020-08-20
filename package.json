@@ -40,7 +40,7 @@
     "@nestjsx/crud-typeorm": "^4.2.0",
     "@sentry/node": "^5.12.3",
     "@types/socket.io": "^2.1.2",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "cache-manager": "^2.10.0",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.10.0",
